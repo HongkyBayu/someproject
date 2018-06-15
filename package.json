@@ -1,12 +1,13 @@
 {
   "name": "nodejs-tdd-template",
   "version": "1.0.0",
-  "description": "<add-project-description-here>",
+  "description": "Some Project",
   "scripts": {
     "test": "NODE_ENV=test mocha --exit --require babel-core/register --require babel-polyfill test/**/*.test.js",
     "coverage": "nyc --reporter=text --reporter=lcov npm run test",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "server": "nodemon -r babel-core/register -r babel-polyfill ./server.js"
   },
   "license": "ISC",
   "dependencies": {
