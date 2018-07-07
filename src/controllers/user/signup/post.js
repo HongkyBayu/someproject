@@ -1,11 +1,11 @@
 import firebase from 'firebase';
+import Boom from 'boom';
 import UserSchema from '../../../schema/user/userSchema';
 
 const sendVerificationEmail = async () => {
   const { currentUser } = firebase.auth();
   try {
     await currentUser.sendEmailVerification();
-    console.log('Verification Email Sent');
   } catch (error) {
     console.log(error);
   }
@@ -19,7 +19,7 @@ const userSignUp = async (request, h) => {
     await sendVerificationEmail();
     return h.response(registeredUser).code(201);
   } catch (error) {
-    return h.response(error);
+    return Boom.badRequest(error);
   }
 };
 

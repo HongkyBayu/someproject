@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import Boom from 'boom';
 import UserSchema from '../../../schema/user/userSchema';
 
 const userSigIn = async (request, h) => {
@@ -8,7 +9,7 @@ const userSigIn = async (request, h) => {
     const loggedUser = await firebase.auth().signInWithEmailAndPassword(email, password);
     return h.response(loggedUser).code(200);
   } catch (error) {
-    return h.response(error);
+    return Boom.badRequest(error);
   }
 };
 
