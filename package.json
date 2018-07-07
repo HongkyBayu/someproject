@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-tdd-template",
+  "name": "SangkutiApps API",
   "version": "1.0.0",
-  "description": "Some Project",
+  "description": "SangkutiApps Backend",
   "scripts": {
     "test": "NODE_ENV=test mocha --exit --require babel-core/register --require babel-polyfill test/**/*.test.js",
     "coverage": "nyc --reporter=text --reporter=lcov npm run test",
@@ -23,6 +23,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "firebase": "^5.2.0",
+    "firebaseauth": "^1.0.0",
     "hapi": "^17.2.1",
     "hapi-swagger": "^9.1.1",
     "inert": "^5.1.0",
