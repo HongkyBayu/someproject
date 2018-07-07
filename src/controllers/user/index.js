@@ -1,5 +1,7 @@
-import postUserSignup from './signup/post';
+import postUserSignUp from './signup/post';
+import postUserSignIn from './sigin/post';
 
 module.exports = [
-  postUserSignup,
+  postUserSignUp,
+  postUserSignIn,
 ];

@@ -1,21 +1,35 @@
 import firebase from 'firebase';
 import UserSchema from '../../../schema/user/userSchema';
 
-const userSignup = (request, h) => {
+const sendVerificationEmail = async () => {
+  const { currentUser } = firebase.auth();
+  try {
+    await currentUser.sendEmailVerification();
+    console.log('Verification Email Sent');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const userSignUp = async (request, h) => {
   const { email, password } = request.payload;
 
-  return firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(results => h.response(results).code(201))
-    .catch(error => h.response(error).code(400));
+  try {
+    const registeredUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
+    await sendVerificationEmail();
+    return h.response(registeredUser).code(201);
+  } catch (error) {
+    return h.response(error);
+  }
 };
 
 module.exports = {
   method: 'POST',
   path: '/user/signup',
   config: {
-    handler: userSignup,
-    description: 'Signup new user',
-    notes: 'Signup user using firebase auth',
+    handler: userSignUp,
+    description: 'Sign-up new user',
+    notes: 'Sign-up user using firebase auth',
     tags: ['api'],
     validate: {
       payload: UserSchema,
