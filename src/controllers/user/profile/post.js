@@ -1,3 +1,6 @@
+/**
+ * Represents the insert user profile routes
+ */
 import firebase from 'firebase';
 import admin from 'firebase-admin';
 import Admin from '../../../Admin';

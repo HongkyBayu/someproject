@@ -1,3 +1,6 @@
+/**
+ * Represents the admin configuration
+ */
 import serviceAccount from '../serviceAccount.json';
 
 export default class Admin {

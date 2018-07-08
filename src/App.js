@@ -1,3 +1,6 @@
+/**
+ * Represents the initialize configuration of the application
+ */
 import HapiSwagger from 'hapi-swagger';
 import Inert from 'inert';
 import Vision from 'vision';

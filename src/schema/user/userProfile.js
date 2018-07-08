@@ -1,3 +1,6 @@
+/**
+ * Represents the userProfile Schema
+ */
 import Joi from 'joi';
 
 const UserProfileSchema = {

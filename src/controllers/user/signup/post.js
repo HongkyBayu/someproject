@@ -1,3 +1,6 @@
+/**
+ * Represents the signup routes for user
+ */
 import firebase from 'firebase';
 import Boom from 'boom';
 import UserSchema from '../../../schema/user/userSchema';

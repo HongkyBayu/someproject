@@ -1,3 +1,6 @@
+/**
+ * Represents the configuration of firebase
+ */
 const dotenv = require('dotenv');
 
 const config = dotenv.config();

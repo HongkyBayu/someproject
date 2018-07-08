@@ -1,19 +1,23 @@
+/**
+ * Represents the get profile routes
+ */
 import firebase from 'firebase';
+import admin from 'firebase-admin';
+import Admin from '../../../Admin';
+import enrichUserProfile from '../../../transformation/enrichUserProfile';
 
 const userProfile = async (request, h) => {
+  const administrator = new Admin(admin);
+  const db = administrator.initializeDb();
   const { currentUser } = firebase.auth();
 
   if (currentUser) {
-    const {
-      displayName, email, photoURL, emailVerified,
-    } = currentUser;
-    const userProfiles = {
-      name: displayName,
-      email,
-      photoURL,
-      emailVerified,
-    };
-    return h.response(userProfiles).code(200);
+    const userCollection = db.collection('users').doc(currentUser.uid);
+    const getUserProfile = await userCollection.get();
+    const profile = getUserProfile.data();
+    const enrichedUserProfile = enrichUserProfile(profile, currentUser);
+
+    return h.response(enrichedUserProfile).code(200);
   }
 
   return h.response('No current user found!').code(400);

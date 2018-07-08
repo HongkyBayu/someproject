@@ -1,3 +1,6 @@
+/**
+ * Represents the start point of the server
+ */
 import Hapi from 'hapi';
 import firebase from 'firebase';
 import App from './src/App';
