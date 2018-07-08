@@ -1,11 +1,33 @@
 import firebase from 'firebase';
+import admin from 'firebase-admin';
+import Admin from '../../../Admin';
 import UserProfileSchema from '../../../schema/user/userProfile';
 
-const updateUserProfile = async (request, h) => {
+const insertUserProfile = async (request, h) => {
+  const administrator = new Admin(admin);
+  const db = administrator.initializeDb();
   const { currentUser } = firebase.auth();
+  const userCollection = db.collection('users').doc(currentUser.uid);
 
   if (currentUser) {
-    const { displayName } = request.payload;
+    const {
+      address,
+      dateOfBirth,
+      firstName,
+      lastName,
+      phoneNumber,
+    } = request.payload;
+
+    const displayName = `${firstName} ${lastName}`;
+
+    userCollection.set({
+      address,
+      dateOfBirth,
+      firstName,
+      lastName,
+      phoneNumber,
+    });
+
     await currentUser.updateProfile({ displayName });
     return h.response('User profile has been updated').code(200);
   }
@@ -17,9 +39,9 @@ module.exports = {
   method: 'POST',
   path: '/user/profile',
   config: {
-    handler: updateUserProfile,
-    description: 'Update user displayName profile',
-    notes: 'Update user profile displayName with firebase auth',
+    handler: insertUserProfile,
+    description: 'Insert user displayName profile',
+    notes: 'Insert user profile displayName with firebase auth',
     tags: ['api'],
     validate: {
       payload: UserProfileSchema,
