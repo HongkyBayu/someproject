@@ -3,12 +3,10 @@
  */
 import firebase from 'firebase';
 import admin from 'firebase-admin';
-import Admin from '../../../Admin';
 import UserProfileSchema from '../../../schema/user/userProfile';
 
 const insertUserProfile = async (request, h) => {
-  const administrator = new Admin(admin);
-  const db = administrator.initializeDb();
+  const db = admin.firestore();
   const { currentUser } = firebase.auth();
   const userCollection = db.collection('users').doc(currentUser.uid);
 

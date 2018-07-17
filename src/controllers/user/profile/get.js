@@ -3,12 +3,10 @@
  */
 import firebase from 'firebase';
 import admin from 'firebase-admin';
-import Admin from '../../../Admin';
 import enrichUserProfile from '../../../transformation/enrichUserProfile';
 
 const userProfile = async (request, h) => {
-  const administrator = new Admin(admin);
-  const db = administrator.initializeDb();
+  const db = admin.firestore();
   const { currentUser } = firebase.auth();
 
   if (currentUser) {
