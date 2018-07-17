@@ -3,12 +3,10 @@
  */
 import firebase from 'firebase';
 import admin from 'firebase-admin';
-import Admin from '../../../Admin';
 import BusinessProfileSchema from '../../../schema/business/businessProfile';
 
 const insertBusinessProfile = async (request, h) => {
-  const administrator = new Admin(admin);
-  const db = administrator.initializeDb();
+  const db = admin.firestore();
   const { currentUser } = firebase.auth();
 
   if (currentUser) {

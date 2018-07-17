@@ -3,11 +3,9 @@
  */
 import firebase from 'firebase';
 import admin from 'firebase-admin';
-import Admin from '../../../Admin';
 
 const businessProfile = async (request, h) => {
-  const administrator = new Admin(admin);
-  const db = administrator.initializeDb();
+  const db = admin.firestore();
   const { currentUser } = firebase.auth();
 
   if (currentUser) {
