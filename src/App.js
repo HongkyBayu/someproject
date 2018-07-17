@@ -5,6 +5,7 @@ import HapiSwagger from 'hapi-swagger';
 import Inert from 'inert';
 import Vision from 'vision';
 import userRoutes from './controllers/user';
+import businessRoutes from './controllers/business';
 
 export default class App {
   constructor(server, firebaseClient) {
@@ -18,6 +19,7 @@ export default class App {
 
   loadControllers() {
     this.server.route(userRoutes);
+    this.server.route(businessRoutes);
   }
 
   async configure() {
